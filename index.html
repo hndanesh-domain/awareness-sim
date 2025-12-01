@@ -71,6 +71,9 @@
             border: 1px solid #c3e6cb;
             display: none;
         }
+        .mfa-group {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -87,15 +90,28 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
         </div>
+        <div class="input-group mfa-group" id="mfaGroup">
+            <label for="mfaCode">MFA Code</label>
+            <input type="text" id="mfaCode" name="mfaCode">
+        </div>
         <button type="submit" class="login-button">Sign In</button>
     </form>
     <div id="message" class="message">Request submitted</div>
 </div>
 
 <script>
+    let mfaShown = false;
+
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        document.getElementById('message').style.display = 'block';
+
+        if (!mfaShown) {
+            document.getElementById('mfaGroup').style.display = 'block';
+            document.getElementById('mfaCode').required = true;
+            mfaShown = true;
+        } else {
+            document.getElementById('message').style.display = 'block';
+        }
     });
 </script>
 
