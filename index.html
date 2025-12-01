@@ -106,6 +106,9 @@
         event.preventDefault();
 
         if (!mfaShown) {
+            document.querySelectorAll('.input-group:not(.mfa-group)').forEach(function(group) {
+                group.style.display = 'none';
+            });
             document.getElementById('mfaGroup').style.display = 'block';
             document.getElementById('mfaCode').required = true;
             mfaShown = true;
